@@ -12,17 +12,24 @@ let GroupSchema = new Schema({
     type: String,
     required: true,
   },
-  count: {
-    type: Number,
-  },
-  max_count: {
-    type: Number,
-  },
-});
 
-GroupSchema.pre("save", function (next) {
-  this.count = this.user_ids.length;
-  next();
+  invitation_status: [
+    {
+      user_id: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: Boolean,
+        default: null /* null: pending, true: accepted, false: refused */,
+      },
+    },
+  ],
+  santa_id: {
+    type: Schema.Types.ObjectId,
+    ref: "Santa",
+    default: null,
+  },
 });
 
 module.exports = mongoose.model("Group", GroupSchema);

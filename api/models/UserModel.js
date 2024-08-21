@@ -27,6 +27,16 @@ let UserSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  groups_id: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Group",
+    },
+  ],
+  admin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

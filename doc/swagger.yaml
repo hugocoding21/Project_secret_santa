@@ -1,0 +1,674 @@
+openapi: 3.0.0
+info:
+  title: school
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:3000
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+paths:
+  /users/register:
+    post:
+      tags:
+        - default
+      summary: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: eva
+                password: eva
+                firstName: eva
+                lastName: eva
+                year: 1998
+                gender: false
+      responses:
+        "201":
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "899"
+            ETag:
+              schema:
+                type: string
+                example: W/"383-Vbs+OehAcJE2AGWow/vPRU4b6XQ"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 09:24:26 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Register many
+                  value:
+                    - email: eva
+                      password: >-
+                        $2b$10$/GxINK73ly2gKIU7uwB2T.aeBzuvhLsbi5il4AJpYrXLEE5FpTUZu
+                      firstName: eva
+                      lastName: eva
+                      year: 1998
+                      gender: false
+                      groups_id: []
+                      admin: false
+                      _id: 66c5b24ad3670337488d026e
+                      __v: 0
+                    - email: lucie
+                      password: >-
+                        $2b$10$JTWCT17s3.rz1oI4E4oUCue3alVDgpBhsYeaPinR3E4Bq1Z6POhty
+                      firstName: lucie
+                      lastName: lucie
+                      year: 1998
+                      gender: false
+                      groups_id: []
+                      admin: false
+                      _id: 66c5b24ad3670337488d026f
+                      __v: 0
+                    - email: marc
+                      password: >-
+                        $2b$10$BlM4dmm3Ze66MrkJtczGoeKKrYKW6wQYQgDaRT80.bRx1DbndUw3C
+                      firstName: marc
+                      lastName: marc
+                      year: 1998
+                      gender: true
+                      groups_id: []
+                      admin: false
+                      _id: 66c5b24ad3670337488d0270
+                      __v: 0
+                    - email: paul
+                      password: >-
+                        $2b$10$c5yYhQCemET1Pc88EnRdMOECPgNo7bDYnNOd1l9u2heXpCH5sS05e
+                      firstName: paul
+                      lastName: paul
+                      year: 1998
+                      gender: true
+                      groups_id: []
+                      admin: false
+                      _id: 66c5b24ad3670337488d0271
+                      __v: 0
+                example-1:
+                  summary: Register one and isadmin
+                  value:
+                    email: admin
+                    password: >-
+                      $2b$10$mmqqWv3AWBS6Ae4BGLWc4uWqqfDpK2xYY5y8Cao2wqvZd49cJlg8e
+                    firstName: admin
+                    lastName: admin
+                    year: 1998
+                    gender: true
+                    groups_id: []
+                    admin: true
+                    _id: 66c5b3215e29e77d6bfd7c50
+                    __v: 0
+  /users/login:
+    post:
+      tags:
+        - default
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: eva
+                password: eva
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "220"
+            ETag:
+              schema:
+                type: string
+                example: W/"dc-IsSE5Jp8NkuzLMq3nXJaujQYeLs"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 09:25:41 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                token: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzViMjRhZDM2NzAzMzc0ODhkMDI2ZSIsImVtYWlsIjoiZXZhIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3MjQyMzIzNDEsImV4cCI6MTcyNDI2ODM0MX0.q6F1w5p91UJqp2Lt7R95JkH3-by2VsnWh057gzgn3nk
+  /group/create:
+    post:
+      tags:
+        - default
+      summary: Create group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: test
+                max_count: 4
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzRiMzJjODFmOTBhZTJkZmVjYTRmMCIsImVtYWlsIjoicGF1bCIsImlhdCI6MTcyNDE3Mzg0OSwiZXhwIjoxNzI0MjA5ODQ5fQ.B3nW9i9ZXQC6Gcz78Y87DfSzDaDYPsj92GiCmEmSW4o
+      responses:
+        "201":
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "193"
+            ETag:
+              schema:
+                type: string
+                example: W/"c1-sHjPbZffCRQVMHJvLNuW+Cg6zXw"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 13:20:47 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: Group created successfully!
+                group:
+                  user_ids:
+                    - 66c5e95048594f7add47945b
+                  name: Groupe d'Eva
+                  santa_id: null
+                  _id: 66c5e9af48594f7add479461
+                  invitation_status: []
+                  __v: 0
+  /group/add:
+    post:
+      tags:
+        - default
+      summary: Invite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                group_id: 66c4ce85cd69d9a1e9142826
+                user_id: 66c4aaac8bc9784105993f42
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzRiMzJjODFmOTBhZTJkZmVjYTRmMCIsImVtYWlsIjoicGF1bCIsImlhdCI6MTcyNDE3Mzg0OSwiZXhwIjoxNzI0MjA5ODQ5fQ.B3nW9i9ZXQC6Gcz78Y87DfSzDaDYPsj92GiCmEmSW4o
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "284"
+            ETag:
+              schema:
+                type: string
+                example: W/"11c-H2tDZclAKOtQsy6lCMkfQ0ky1ys"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 09:31:30 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Invite
+                  value:
+                    message: User invited successfully.
+                    group:
+                      _id: 66c5b37a5e29e77d6bfd7c52
+                      user_ids:
+                        - 66c5b24ad3670337488d026e
+                      name: Group d'Eva
+                      max_count: 4
+                      invitation_status:
+                        - user_id: 66c5b24ad3670337488d026f
+                          status: null
+                          _id: 66c5b3f25e29e77d6bfd7c56
+                      count: 1
+                      __v: 1
+                example-1:
+                  summary: Invited all result
+                  value:
+                    message: User invited successfully.
+                    group:
+                      _id: 66c5b37a5e29e77d6bfd7c52
+                      user_ids:
+                        - 66c5b24ad3670337488d026e
+                      name: Group d'Eva
+                      max_count: 4
+                      invitation_status:
+                        - user_id: 66c5b24ad3670337488d026f
+                          status: null
+                          _id: 66c5b3f25e29e77d6bfd7c56
+                        - user_id: 66c5b24ad3670337488d0270
+                          status: null
+                          _id: 66c5b42a5e29e77d6bfd7c5a
+                        - user_id: 66c5b24ad3670337488d0271
+                          status: null
+                          _id: 66c5b4395e29e77d6bfd7c5f
+                      count: 1
+                      __v: 3
+  /users/group/66c4bdb71dccbe0efe4780d7:
+    post:
+      tags:
+        - default
+      summary: Handle Invitation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status: false
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzRiZTQ4MWRjY2JlMGVmZTQ3ODBkYSIsImVtYWlsIjoiZXZhIiwiaWF0IjoxNzI0MTY5ODEyLCJleHAiOjE3MjQyMDU4MTJ9.UhPG3r3CiAaWrYOcA2mIgG9-1RhCgDjG-RD4F87g_hs
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "288"
+            ETag:
+              schema:
+                type: string
+                example: W/"120-p4dPSwXouXX2j7oA/HbXLlEO9qo"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 08:25:47 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Handle Invitation
+                  value:
+                    message: Statut de l'invitation mis à jour
+                    group:
+                      _id: 66c596cc1f0f815faf1536fb
+                      user_ids:
+                        - 66c5966c1f0f815faf1536f5
+                      name: group1
+                      max_count: 4
+                      invitation_status:
+                        - user_id: 66c596851f0f815faf1536f7
+                          status: false
+                          _id: 66c59901294702d5e60f3c1f
+                      count: 1
+                      __v: 2
+                example-1:
+                  summary: Accept inv as user lucie
+                  value:
+                    message: Statut de l'invitation mis à jour
+                    group:
+                      _id: 66c5b37a5e29e77d6bfd7c52
+                      user_ids:
+                        - 66c5b24ad3670337488d026e
+                        - 66c5b24ad3670337488d026f
+                      name: Group d'Eva
+                      max_count: 4
+                      invitation_status:
+                        - user_id: 66c5b24ad3670337488d026f
+                          status: true
+                          _id: 66c5b3f25e29e77d6bfd7c56
+                        - user_id: 66c5b24ad3670337488d0270
+                          status: null
+                          _id: 66c5b42a5e29e77d6bfd7c5a
+                        - user_id: 66c5b24ad3670337488d0271
+                          status: null
+                          _id: 66c5b4395e29e77d6bfd7c5f
+                      count: 1
+                      __v: 3
+                example-2:
+                  summary: All Accepted
+                  value:
+                    message: Statut de l'invitation mis à jour
+                    group:
+                      _id: 66c5b37a5e29e77d6bfd7c52
+                      user_ids:
+                        - 66c5b24ad3670337488d026e
+                        - 66c5b24ad3670337488d026f
+                        - 66c5b24ad3670337488d0270
+                        - 66c5b24ad3670337488d0271
+                      name: Group d'Eva
+                      max_count: 4
+                      invitation_status:
+                        - user_id: 66c5b24ad3670337488d026f
+                          status: true
+                          _id: 66c5b3f25e29e77d6bfd7c56
+                        - user_id: 66c5b24ad3670337488d0270
+                          status: true
+                          _id: 66c5b42a5e29e77d6bfd7c5a
+                        - user_id: 66c5b24ad3670337488d0271
+                          status: true
+                          _id: 66c5b4395e29e77d6bfd7c5f
+                      count: 1
+                      __v: 3
+  /group/:
+    get:
+      tags:
+        - default
+      summary: get group name
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "19"
+            ETag:
+              schema:
+                type: string
+                example: W/"13-zAUCx2/uuSq5hIXJwLEoYwV+4sM"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 08:18:14 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - name: group1
+  /group/admin:
+    get:
+      tags:
+        - default
+      summary: admin get all
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzVhMDJmMDNkYTdmYzYwNDdjMDIwOCIsImVtYWlsIjoiaHVnIiwiYWRtaW4iOnRydWUsImlhdCI6MTcyNDIyNzYzOSwiZXhwIjoxNzI0MjYzNjM5fQ.F15QD40dkmt24bYSPAKqBjlRtfxHttFvz5gjR2zYNqM
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "233"
+            ETag:
+              schema:
+                type: string
+                example: W/"e9-SjJVdu2dccy71b39i4fV4AYirCI"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 08:17:51 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 66c596cc1f0f815faf1536fb
+                  user_ids:
+                    - 66c5966c1f0f815faf1536f5
+                  name: group1
+                  max_count: 4
+                  invitation_status:
+                    - user_id: 66c596851f0f815faf1536f7
+                      status: false
+                      _id: 66c59901294702d5e60f3c1f
+                  count: 1
+                  __v: 2
+  /group/create-santa:
+    get:
+      tags:
+        - default
+      summary: create-santa
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzViMjRhZDM2NzAzMzc0ODhkMDI2ZSIsImVtYWlsIjoiZXZhIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3MjQyNDUyMDMsImV4cCI6MTcyNDI4MTIwM30.sTKcxHuv_pJww8Gi4FgA4OMSCIYna0XmKhPky0qLaVY
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "328"
+            ETag:
+              schema:
+                type: string
+                example: W/"148-jUDWql40pZHXlSeOp+P7n7nG+1I"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 13:16:22 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: Attributions enregistrées
+                assignments:
+                  - from: 66c5b24ad3670337488d026e
+                    to: 66c5b24ad3670337488d026f
+                  - from: 66c5b24ad3670337488d026f
+                    to: 66c5b24ad3670337488d0270
+                  - from: 66c5b24ad3670337488d0270
+                    to: 66c5b24ad3670337488d0271
+                  - from: 66c5b24ad3670337488d0271
+                    to: 66c5b24ad3670337488d026e
+  /users/getsanta:
+    get:
+      tags:
+        - default
+      summary: Get my santa
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YzViMjRhZDM2NzAzMzc0ODhkMDI2ZSIsImVtYWlsIjoiZXZhIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3MjQyNDUyMDMsImV4cCI6MTcyNDI4MTIwM30.sTKcxHuv_pJww8Gi4FgA4OMSCIYna0XmKhPky0qLaVY
+      responses:
+        "200":
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: "46"
+            ETag:
+              schema:
+                type: string
+                example: W/"2e-ePPP7A0cIJKpCUw8obSGVauLZQk"
+            Date:
+              schema:
+                type: string
+                example: Wed, 21 Aug 2024 13:08:02 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: Votre Secret Santa est paul paul
